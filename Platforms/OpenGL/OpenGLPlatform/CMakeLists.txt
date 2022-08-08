@@ -23,16 +23,9 @@ add_library(${PROJECTNAME} ${HEADER_FILES} ${SOURCE_FILES})
 
 add_dependencies(${PROJECTNAME} MyGUIEngine)
 
-if (APPLE)
-	target_link_libraries(${PROJECTNAME} ${OPENGL_gl_LIBRARY} MyGUIEngine)
-else ()
-	# opengl instead of gl makes it compile and work in a libX11-free wayland setup
-	target_link_libraries(${PROJECTNAME} ${OPENGL_opengl_LIBRARY} MyGUIEngine)
-endif ()
+target_link_libraries(${PROJECTNAME} ${OPENGL_gl_LIBRARY} MyGUIEngine)
 if (MYGUI_USE_SYSTEM_GLEW)
 	target_link_libraries(${PROJECTNAME} ${GLEW_LIBRARIES})
-else ()
-	target_link_libraries(${PROJECTNAME} ${OPENGL_glx_LIBRARY})
 endif ()
 
 link_directories(${OPENGL_LIB_DIR})
